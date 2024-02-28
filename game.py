@@ -12,7 +12,7 @@ background_image = pygame.image.load("./spacebackground.png")
 background_image = pygame.transform.scale(background_image,(1280, 720))
 lose = False
 win = False
-over_image = pygame.image.load("./game over.png")
+over_image = pygame.image.load("./gameover.png")
 over_image = pygame.transform.scale(background_image,(1280, 720))
 def main():
     # pygame setup    
@@ -22,13 +22,13 @@ def main():
     a2 = asteriod("./asteroid.png", 1280 / 2, 720)
     a3 = asteriod("./asteroid.png", 1280 / 2, 0)
     a4 = asteriod("./asteroid.png", 1280 / 4, 0)
-    a5 = asteriod("./asteroid.png", 1270 / 4/3, 720)
-    a6 = asteriod("./asteroid.png", 1270 / 4/3, 0)
     a7 = asteriod("./asteroid.png", 960, 0)
     a8= asteriod("./asteroid.png", 960, 0)
-    allsprites = pygame.sprite.RenderPlain((p1,p2,a,a2,a3,a4,a5,a6,a7,a8))
-    running = True
     
+    allsprites = pygame.sprite.RenderPlain((p1,p2,a,a2,a3,a4,a7,a8))
+    running = True  
+    global background_image
+
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
@@ -46,6 +46,12 @@ def main():
         if (len(allsprites.sprites()) == 2 and allsprites.has(p1)):
             writeToScreen("You Win!", 1280 / 2, 720 / 2)
             
+        if (lose):
+            print("Game over")
+            allsprites.empty()
+            background_image = pygame.image.load("./gameover.png")
+            background_image = pygame.transform.scale(background_image, (screen.get_width(), screen.get_height()))
+
 
             
 
@@ -120,12 +126,15 @@ class asteriod(pygame.sprite.Sprite):
                 self.kill()
         if (self.rect.colliderect(p1.rect)):
             p1.kill()
+            global lose
+            lose = True
             #writeToScreen("You Lose!", 1280 / 2, 720 / 2)
-            global over_image
-            screen.blit(over_image,(1280, 720))
-            
-
-
+            # global over_image
+            # screen.blit(over_image,(0, 0))
+            # black = (0, 0, 0)
+            # screen.fill(black)
+            # screen.blit(over_image, (self.rect.width // 2 - self.rect.height() // 2, self.rect.height // 2 - self.rect.height() // 2))
+            # screen.blit(over_image, (0, 0))
 
 
 
