@@ -102,6 +102,15 @@ class PlayerWasd(pygame.sprite.Sprite):
              x -= self.speed
         if keys[pygame.K_d]:
              x += self.speed
+        if x <= 0:
+            x = 0 
+        if y<= 0:
+            y = 0
+        if x>= screen.get_width() - self.rect.width:
+            x = screen.get_width() - self.rect.width
+        if y >= screen.get_height() - self.rect.height:
+            y = screen.get_height() - self.rect.height
+
         self.rect.topleft = (x,y)
 
 class asteriod(pygame.sprite.Sprite):
