@@ -24,7 +24,7 @@ def main():
     a4 = asteriod("./asteroid.png", 1280 / 4, 0)
     a7 = asteriod("./asteroid.png", 960, 0)
     a8= asteriod("./asteroid.png", 960, 0)
-    
+    win = False
     allsprites = pygame.sprite.RenderPlain((p1,p2,a,a2,a3,a4,a7,a8))
     running = True  
     global background_image
@@ -44,7 +44,13 @@ def main():
         allsprites.update()
         allsprites.draw(screen)
         if (len(allsprites.sprites()) == 2 and allsprites.has(p1)):
-            writeToScreen("You Win!", 1280 / 2, 720 / 2)
+            #writeToScreen("You Win!", 1280 / 2, 720 / 2)
+            win = True
+        if (win):
+            allsprites.empty()
+            background_image = pygame.image.load("./win.png")
+            background_image = pygame.transform.scale(background_image, (screen.get_width(), screen.get_height()))
+
             
         if (lose):
             print("Game over")
