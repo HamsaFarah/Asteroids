@@ -132,7 +132,7 @@ class asteriod(pygame.sprite.Sprite):
         (x,y) = self.rect.topleft
         if y < 0 or y > screen.get_height():
             self.direction = -self.direction
-        y = y + (5 * self.direction)
+        y = y + (1 * self.direction)
         self.rect.topleft = (x,y)
         if pygame.mouse.get_pressed()[0]:
             mouse_x, mouse_y = pygame.mouse.get_pos()
